@@ -1,3 +1,22 @@
 spring:
   application:
-    name: htmx-learning
+    name: htmx-learning # アプリケーションの名前を指定しています。
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/testdb
+    username: postgres
+    password: postgres
+    pool:
+      enabled: true  # コネクションプールを有効にします
+      max-size: 20  # 最大プールサイズを指定します
+      initial-size: 5  # 初期プールサイズを指定します
+      max-idle-time: 30s  # コネクションがアイドル状態で保持される最大時間を指定します
+  threads:
+    virtual:
+      enabled: true # 仮想スレッドの使用を有効にしています。
+server:
+  port: 8080 # サーバーがリッスンするポート番号を指定します。
+  shutdown: graceful   # サーバーのシャットダウン方法を指定します。ここではgraceful（優雅なシャットダウン）となっています。
+  graceful:
+    shutdown:
+      # 30秒経過後もまだ未完了のリクエストがある場合、Spring Bootはこれらのリクエストを強制的に中断し、アプリケーションをシャットダウンします。
+      timeout: 30s # シャットダウンを待機する最大時間を30秒に設定
