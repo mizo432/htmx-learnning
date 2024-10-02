@@ -1,4 +1,4 @@
-package org.marspj.htmx;
+package org.venuspj.htmx;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

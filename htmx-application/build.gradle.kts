@@ -4,7 +4,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.6"
 }
 
-group = "org.marspj"
+group = "org.venuspj"
 version = "0.0.1-SNAPSHOT"
 
 java {
@@ -12,6 +12,13 @@ java {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
+
+extra["webjarsFontawesomeVersion"] =  "4.7.0"
+extra["webjarsBootstrapVersion"] =  "5.2.3"
+extra["htmxSpringBootThymeleafVersion"] =  "3.5.1"
+extra["htmxOrgVersion"] =  "2.0.2"
+extra["assertjVersion"] =  "3.26.3"
+// 他のバージョンもここに追加
 
 repositories {
 	mavenCentral()
@@ -31,12 +38,20 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
 	runtimeOnly("org.postgresql:r2dbc-postgresql")
-	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
-	testImplementation("org.assertj:assertj-core:3.26.3")
+	testImplementation("org.assertj:assertj-core:${property("assertjVersion")}")
+	implementation ("io.github.wimdeblauwe:htmx-spring-boot-thymeleaf:${property("htmxSpringBootThymeleafVersion")}")
+	runtimeOnly ("org.webjars.npm:bootstrap:${property("webjarsBootstrapVersion")}")
+	runtimeOnly ("org.webjars.npm:font-awesome:${property("webjarsFontawesomeVersion")}")
+	runtimeOnly ("org.webjars.npm:htmx.org:${property("htmxOrgVersion")}")
+	runtimeOnly ("com.github.ben-manes.caffeine:caffeine")
+	runtimeOnly ("com.h2database:h2")
 }
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	testLogging {
+		events("passed", "failed", "skipped")
+	}
 }

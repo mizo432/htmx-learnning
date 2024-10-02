@@ -1,4 +1,4 @@
-package org.marspj.htmx;
+package org.venuspj.htmx;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
