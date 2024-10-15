@@ -25,4 +25,12 @@ public class PersonController {
         .modelAttribute("items", new ReactiveDataDriverContextVariable(flux, 1))
         .build());
   }
+
+  //TODO createInput
+  //TODO createConfirm
+  //TODO create
+  //TODO updateInput
+  //TODO updateConfirm
+  //TODO update
+
 }
