@@ -1,8 +1,11 @@
 spring:
   application:
     name: htmx-learning # アプリケーションの名前を指定しています。
+  flyway:
+    url: jdbc:postgresql://localhost:5432/postgres
+    locations: classpath:db/migration
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/testdb
+    url: r2dbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
     pool:
@@ -20,3 +23,7 @@ server:
     shutdown:
       # 30秒経過後もまだ未完了のリクエストがある場合、Spring Bootはこれらのリクエストを強制的に中断し、アプリケーションをシャットダウンします。
       timeout: 30s # シャットダウンを待機する最大時間を30秒に設定
+
+logging:
+  group:
+    root: WARN
