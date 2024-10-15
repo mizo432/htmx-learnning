@@ -11,6 +11,10 @@ import org.venuspj.htmx.admin.domain.model.person.Person;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * Controller class for managing Person entities in the admin section. Provides endpoint to retrieve
+ * a list of all people.
+ */
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
@@ -18,6 +22,11 @@ public class PersonController {
 
   private final PeopleQuery peopleQuery;
 
+  /**
+   * すべての人のリストを取得するためのHTTP GETリクエストを処理します。
+   *
+   * @return リアクティブなデータドライバコンテキスト変数を持つビューのテンプレートを初期化するMonoを返します。
+   */
   @GetMapping("/people")
   public Mono<Rendering> getAll() {
     Flux<Person> flux = peopleQuery.findAll();
