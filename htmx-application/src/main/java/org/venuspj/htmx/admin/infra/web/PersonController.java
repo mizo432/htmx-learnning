@@ -41,5 +41,6 @@ public class PersonController {
   //TODO updateInput
   //TODO updateConfirm
   //TODO update
+  //TODO delete
 
 }
