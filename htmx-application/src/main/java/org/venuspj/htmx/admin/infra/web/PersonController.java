@@ -35,12 +35,12 @@ public class PersonController {
         .build());
   }
 
-  //TODO createInput
-  //TODO createConfirm
-  //TODO create
-  //TODO updateInput
-  //TODO updateConfirm
-  //TODO update
-  //TODO delete
+  //TODO createInput get
+  //TODO createConfirm get/post
+  //TODO create post
+  //TODO updateInput get
+  //TODO updateConfirm get/post
+  //TODO update post
+  //TODO delete post
 
 }
