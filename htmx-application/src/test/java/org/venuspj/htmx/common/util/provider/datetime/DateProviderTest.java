@@ -1,4 +1,4 @@
-package org.venuspj.htmx.common.util.primitive.datetime;
+package org.venuspj.htmx.common.util.provider.datetime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -26,12 +26,13 @@ class DateProviderTest {
       LocalDateTime expectLocalDateTime = LocalDateTime.of(2024, 12, 10, 12, 22, 11);
       DateProvider dp = Mockito.spy(DateProvider.class);
       given(dp.now()).willReturn(expectLocalDateTime);
-      DateProvider.setDateProvider(dp);
+      new DateProvider(dp);
 
       LocalDateTime result = DateProvider.currentLocalDateTime();
 
       assertThat(result).as("提供されたLocalDateTimeが予期した物と一致するか")
           .isEqualTo(expectLocalDateTime);
+      DateProvider.clear();
     }
   }
 
@@ -46,12 +47,14 @@ class DateProviderTest {
       LocalDateTime expectedLocalDateTime = LocalDateTime.of(2024, 12, 10, 12, 22, 11);
       DateProvider dp = Mockito.spy(DateProvider.class);
       given(dp.now()).willReturn(expectedLocalDateTime);
-      DateProvider.setDateProvider(dp);
+      new DateProvider(dp);
 
       LocalDate result = DateProvider.currentLocalDate();
 
       assertThat(result).as("提供されたLocalDateが予期した物と一致するか")
           .isEqualTo(expectedLocalDate);
+
+      DateProvider.clear();
     }
 
   }
@@ -67,12 +70,13 @@ class DateProviderTest {
       LocalTime expectedLocalTime = LocalTime.of(13, 15, 20);
       DateProvider dp = Mockito.spy(DateProvider.class);
       given(dp.now()).willReturn(expectedLocalDateTime);
-      DateProvider.setDateProvider(dp);
+      new DateProvider(dp);
 
       LocalTime result = DateProvider.currentLocalTime();
 
       assertThat(result).as("提供されたLocalTimeが予期した物と一致するか")
           .isEqualTo(expectedLocalTime);
+      DateProvider.clear();
     }
   }
 
@@ -87,12 +91,13 @@ class DateProviderTest {
       YearMonth expectedYearMonth = YearMonth.of(2024, 12);
       DateProvider dp = Mockito.spy(DateProvider.class);
       given(dp.now()).willReturn(expectedLocalDateTime);
-      DateProvider.setDateProvider(dp);
+      new DateProvider(dp);
 
       YearMonth result = DateProvider.currentYearMonth();
 
       assertThat(result).as("提供されたYearMonthが予期した物と一致するか")
           .isEqualTo(expectedYearMonth);
+      DateProvider.clear();
     }
   }
 
@@ -108,12 +113,14 @@ class DateProviderTest {
           .toEpochMilli();
       DateProvider dp = Mockito.spy(DateProvider.class);
       given(dp.now()).willReturn(expectedLocalDateTime);
-      DateProvider.setDateProvider(dp);
+      new DateProvider(dp);
 
       long result = DateProvider.currentTimeMillis();
 
       assertThat(result).as("提供されたtimeMillisが予期した物と一致するか")
           .isEqualTo(expectedTimeMillis);
+      DateProvider.clear();
+
     }
   }
 
@@ -128,12 +135,14 @@ class DateProviderTest {
       MonthDay expectedMonthDay = MonthDay.of(12, 10);
       DateProvider dp = Mockito.spy(DateProvider.class);
       given(dp.now()).willReturn(expectedLocalDateTime);
-      DateProvider.setDateProvider(dp);
+      new DateProvider(dp);
 
       MonthDay result = DateProvider.currentMonthDay();
 
       assertThat(result).as("提供されたMonthDayが予期した物と一致するか")
           .isEqualTo(expectedMonthDay);
+
+      DateProvider.clear();
     }
   }
 }

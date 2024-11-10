@@ -1,16 +1,21 @@
 package org.venuspj.htmx.admin.domain.model.person;
 
 import com.google.common.base.Objects;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.ToString;
-import org.springframework.data.relational.core.mapping.Table;
 
-@Table("people")
+@Entity
+@Table(name = "people")
 @Data
 @ToString(exclude = "password")
 public class Person {
 
+  public static final boolean NOT_HIDDEN = false;
+  @Id
   private Long id;
   private String email;
   private String phone;
@@ -53,6 +58,10 @@ public class Person {
     return new Person(id, email, phone, initials, userId, password, isHidden, name);
   }
 
+  public static Person newInstance() {
+    return new Person();
+  }
+
   boolean sameIdentifierAs(Person other) {
     return this.id.equals(other.id);
   }
@@ -80,5 +89,14 @@ public class Person {
   @Override
   public int hashCode() {
     return Objects.hashCode(id);
+  }
+
+  public Person updateEntity(Long personId) {
+    return new Person(personId, email, phone, initials, userCode, password, isHidden, name);
+
+  }
+
+  public Person delete() {
+    return new Person(id, email, phone, initials, userCode, password, true, name);
   }
 }

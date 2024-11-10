@@ -1,4 +1,4 @@
-package org.venuspj.htmx.common.util.primitive.ipaddress;
+package org.venuspj.htmx.common.util.provider.ipaddress;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class IpAddressProvider {
 
-  private final static AtomicReference<IpAddressProvider> ipAddressProvider =
+  private final static AtomicReference<IpAddressProvider> IP_ADDRESS_PROVIDER =
       new AtomicReference<>(new IpAddressProvider());
 
   IpAddressProvider() {
@@ -35,19 +35,15 @@ public class IpAddressProvider {
    * @throws UnknownHostException ホストのIPアドレスを決定できない場合
    */
   public static String ipAddress() throws UnknownHostException {
-    return IpAddressProvider
-        .ipAddressProvider
+    return IP_ADDRESS_PROVIDER
         .get()
         .ipHostAddress();
   }
 
 
   protected IpAddressProvider(IpAddressProvider ipAddressProvider) {
-    IpAddressProvider.setIpAddressProvider(ipAddressProvider);
-  }
+    IP_ADDRESS_PROVIDER.set(ipAddressProvider);
 
-  public static void setIpAddressProvider(IpAddressProvider ipAddressProvider) {
-    IpAddressProvider.ipAddressProvider.set(ipAddressProvider);
   }
 
   /**
@@ -64,7 +60,7 @@ public class IpAddressProvider {
    * DateProviderを初期化する
    */
   public static void clear() {
-    IpAddressProvider.ipAddressProvider.set(new IpAddressProvider());
+    IP_ADDRESS_PROVIDER.set(new IpAddressProvider());
 
   }
 

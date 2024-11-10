@@ -1,6 +1,6 @@
 package org.venuspj.htmx.shared.domain.type.snowflakeId;
 
-import org.venuspj.htmx.common.util.primitive.datetime.DateProvider;
+import org.venuspj.htmx.common.util.provider.datetime.DateProvider;
 
 /**
  * SnowflakeIdGeneratorクラスは、Snowflakeアルゴリズムに基づいてユニークなIDを生成するために使われます。

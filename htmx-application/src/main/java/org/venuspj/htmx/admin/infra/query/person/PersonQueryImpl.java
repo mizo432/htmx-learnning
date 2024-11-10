@@ -1,23 +1,29 @@
 package org.venuspj.htmx.admin.infra.query.person;
 
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.venuspj.htmx.admin.appl.query.people.PeopleQuery;
+import org.venuspj.htmx.admin.appl.query.people.PersonQuery;
 import org.venuspj.htmx.admin.domain.model.person.Person;
 import org.venuspj.htmx.admin.domain.model.person.PersonRepository;
-import reactor.core.publisher.Flux;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class PeopleQueryImpl implements PeopleQuery {
+public class PersonQueryImpl implements PersonQuery {
 
   private final PersonRepository personRepository;
 
   @Override
-  public Flux<Person> findAll() {
+  public Iterable<Person> findAll() {
     return personRepository.findAll();
-    
+
+  }
+
+  @Override
+  public Optional<Person> findById(long personId) {
+    return personRepository.findById(personId);
+
   }
 }

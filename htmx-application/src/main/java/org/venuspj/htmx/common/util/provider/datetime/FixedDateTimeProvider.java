@@ -1,4 +1,4 @@
-package org.venuspj.htmx.common.util.primitive.datetime;
+package org.venuspj.htmx.common.util.provider.datetime;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicReference;
@@ -25,7 +25,7 @@ public class FixedDateTimeProvider extends DateProvider {
    */
   public static void initialize(@NonNull LocalDateTime fixedDateTime) {
     FixedDateTimeProvider instance = new FixedDateTimeProvider(fixedDateTime);
-    DateProvider.setDateProvider(instance);
+    new DateProvider(instance);
 
 
   }
@@ -40,7 +40,7 @@ public class FixedDateTimeProvider extends DateProvider {
    * DateProviderを初期化することでクリアします。
    */
   public static void clear() {
-    DateProvider.initialize();
+    DateProvider.clear();
 
   }
 

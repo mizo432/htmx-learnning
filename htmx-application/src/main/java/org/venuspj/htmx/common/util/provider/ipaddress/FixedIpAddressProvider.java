@@ -1,4 +1,4 @@
-package org.venuspj.htmx.common.util.primitive.ipaddress;
+package org.venuspj.htmx.common.util.provider.ipaddress;
 
 import java.util.concurrent.atomic.AtomicReference;
 import lombok.NonNull;
@@ -16,18 +16,17 @@ import lombok.NonNull;
  * メソッドを通じてIPアドレスにアクセスできます。</p>
  *
  * <p>静的IPアドレスをネットワーク操作で使用可能にするためには、{@link #initialize(String)} メソッドを呼び出す必要があります。 このメソッドは
- * {@link StaticIpAddressProvider} クラスの新しいインスタンスを作成し、静的IPアドレスを渡します。 この新しいインスタンスは、既存の
+ * {@link FixedIpAddressProvider} クラスの新しいインスタンスを作成し、静的IPアドレスを渡します。 この新しいインスタンスは、既存の
  * {@link IpAddressProvider} インスタンスを初期化するために使用されます。</p>
  *
  * <p>このクラスはネットワークスタックの初期化やシャットダウンの管理を担当するわけではなく、ネットワーク接続のための静的IPアドレスだけを提供します。</p>
  */
-public class StaticIpAddressProvider extends IpAddressProvider {
+public class FixedIpAddressProvider extends IpAddressProvider {
 
-  private static final AtomicReference<String> ipAddress = new AtomicReference<>();
+  private static final AtomicReference<String> IP_ADDRESS = new AtomicReference<>();
 
-  StaticIpAddressProvider(@NonNull String ipAddress) {
-    super();
-    StaticIpAddressProvider.ipAddress.set(ipAddress);
+  FixedIpAddressProvider(@NonNull String ipAddress) {
+    IP_ADDRESS.set(ipAddress);
   }
 
   /**
@@ -39,13 +38,14 @@ public class StaticIpAddressProvider extends IpAddressProvider {
    * @param ipAddress StaticIpAddressProviderを初期化するためのIPアドレス
    */
   public static void initialize(@NonNull String ipAddress) {
-    StaticIpAddressProvider instance = new StaticIpAddressProvider(ipAddress);
+    FixedIpAddressProvider instance = new FixedIpAddressProvider(ipAddress);
     new IpAddressProvider(instance);
   }
 
   @Override
   protected String ipHostAddress() {
-    return StaticIpAddressProvider.ipAddress.get();
+    return IP_ADDRESS.get();
+
   }
 
   /**

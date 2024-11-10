@@ -1,4 +1,4 @@
-package org.venuspj.htmx.common.util.primitive.datetime;
+package org.venuspj.htmx.common.util.provider.datetime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("StaticDateProviderクラスの")
+@DisplayName("FixedDateProviderクラスのテスト")
 class FixedDateProviderTest {
 
   void teardown() {
@@ -38,6 +38,8 @@ class FixedDateProviderTest {
       assertThat(actual)
           .as("初期化されたエンティティは期待されたLocalDateと等しくなければなりません")
           .isEqualTo(localDate);
+
+      DateProvider.clear();
     }
   }
 }

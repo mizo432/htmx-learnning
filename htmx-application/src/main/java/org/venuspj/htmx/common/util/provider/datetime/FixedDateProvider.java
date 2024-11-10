@@ -1,4 +1,4 @@
-package org.venuspj.htmx.common.util.primitive.datetime;
+package org.venuspj.htmx.common.util.provider.datetime;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -52,7 +52,7 @@ public final class FixedDateProvider extends DateProvider {
    */
   public static void initialize(@NonNull LocalDate localDate) {
     FixedDateProvider instance = new FixedDateProvider(localDate);
-    DateProvider.setDateProvider(instance);
+    new DateProvider(instance);
   }
 
   @Override

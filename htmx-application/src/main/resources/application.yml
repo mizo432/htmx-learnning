@@ -4,18 +4,25 @@ spring:
   flyway:
     url: jdbc:postgresql://localhost:5432/postgres
     locations: classpath:db/migration
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432/postgres
+    user: postgres
+    password: postgres
+  datasource:
+    driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
-    pool:
-      enabled: true  # コネクションプールを有効にします
-      max-size: 20  # 最大プールサイズを指定します
-      initial-size: 5  # 初期プールサイズを指定します
-      max-idle-time: 30s  # コネクションがアイドル状態で保持される最大時間を指定します
+    url: jdbc:postgresql://localhost:5432/postgres
+    hikari:
+      maximum-pool-size: 20
+      connection-timeout: 60000
+      minimum-idle: 5
+      max-lifetime: 30000
   threads:
     virtual:
       enabled: true # 仮想スレッドの使用を有効にしています。
+  jpa:
+    open-in-view: true
+    show-sql: true
+
 server:
   port: 8080 # サーバーがリッスンするポート番号を指定します。
   shutdown: graceful   # サーバーのシャットダウン方法を指定します。ここではgraceful（優雅なシャットダウン）となっています。

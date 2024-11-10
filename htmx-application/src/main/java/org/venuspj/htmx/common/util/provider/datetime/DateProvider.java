@@ -1,4 +1,4 @@
-package org.venuspj.htmx.common.util.primitive.datetime;
+package org.venuspj.htmx.common.util.provider.datetime;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -7,8 +7,6 @@ import java.time.LocalTime;
 import java.time.MonthDay;
 import java.time.YearMonth;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -16,7 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class DateProvider {
 
-  private static final AtomicReference<DateProvider> dateProvider = new AtomicReference<>(
+  private static final AtomicReference<DateProvider> DATE_PROVIDER = new AtomicReference<>(
       new DateProvider());
 
   /**
@@ -29,13 +27,18 @@ public class DateProvider {
 
   }
 
+  protected DateProvider(DateProvider dateProvider) {
+    DATE_PROVIDER.set(dateProvider);
+
+  }
+
   /**
    * 現在の日付と時刻を取得するための DateProvider を設定します。
    *
    * @param dateProvider 設定する DateProvider
    */
   public static void setDateProvider(DateProvider dateProvider) {
-    DateProvider.dateProvider.set(dateProvider);
+    DATE_PROVIDER.set(dateProvider);
   }
 
   /**
@@ -44,7 +47,7 @@ public class DateProvider {
    * このメソッドは、新しいDateProviderのインスタンスで現在の日付プロバイダを設定します。
    */
   protected static void initialize() {
-    DateProvider.dateProvider.set(new DateProvider());
+    DATE_PROVIDER.set(new DateProvider());
 
   }
 
@@ -54,20 +57,7 @@ public class DateProvider {
    * @return 現在のLocalDateTime
    */
   public static LocalDateTime currentLocalDateTime() {
-    return DateProvider.dateProvider.get().now();
-  }
-
-  /**
-   * 現在の日付と時刻を返します。
-   *
-   * @return 現在の日付と時刻
-   * @deprecated {@link #currentLocalDateTime()} メソッドを使用してください。
-   */
-  @Deprecated
-  public static Date currentDate() {
-    ZonedDateTime zdt = currentLocalDateTime().atZone(ZoneId.systemDefault());
-    return Date.from(zdt.toInstant());
-
+    return DATE_PROVIDER.get().now();
   }
 
   /**
@@ -119,6 +109,7 @@ public class DateProvider {
    */
   public static void clear() {
     DateProvider.initialize();
+
   }
 
   /**
@@ -137,6 +128,7 @@ public class DateProvider {
    */
   protected LocalDateTime now() {
     return LocalDateTime.now();
+
   }
 
 }

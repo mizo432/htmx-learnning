@@ -3,7 +3,7 @@ package org.venuspj.htmx.shared.domain.type.snowflakeId;
 import java.net.UnknownHostException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
-import org.venuspj.htmx.common.util.primitive.ipaddress.IpAddressProvider;
+import org.venuspj.htmx.common.util.provider.ipaddress.IpAddressProvider;
 import org.venuspj.htmx.shared.domain.type.application.ApplicationInfo;
 
 public class NodeIdProvider {
