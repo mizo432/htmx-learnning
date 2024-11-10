@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+</head>
+<body>
+<h1>FluxTest</h1>
+<table>
+  <thead>
+  <tr>
+    <th>title</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr th:each="item : ${items}">
+    <td>[[${item}]]</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
