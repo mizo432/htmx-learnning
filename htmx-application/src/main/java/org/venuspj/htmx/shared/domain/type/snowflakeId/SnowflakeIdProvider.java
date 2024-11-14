@@ -29,11 +29,6 @@ public class SnowflakeIdProvider {
    * @see SnowflakeIdProvider
    */
   private static final Long EPOCH = 1609459200000L;
-  /**
-   * The MAX_WORKER_ID variable represents the maximum value allowed for the worker ID in the
-   * Snowflake ID generation algorithm.
-   */
-  private static final long MAX_WORKER_ID = 1023L;
 
   /**
    * Represents the unique ID of a worker.
@@ -58,11 +53,6 @@ public class SnowflakeIdProvider {
   public SnowflakeIdProvider(SnowflakeIdProvider snowflakeIdProvider) {
     workerId = NodeIdProvider.getNodeId();
     SNOWFLAKE_ID_PROVIDER.set(snowflakeIdProvider);
-
-  }
-
-  protected static void setSnowflakeIdProvider(SnowflakeIdProvider snowflakeIdProvider) {
-    SnowflakeIdProvider.SNOWFLAKE_ID_PROVIDER.set(snowflakeIdProvider);
 
   }
 
