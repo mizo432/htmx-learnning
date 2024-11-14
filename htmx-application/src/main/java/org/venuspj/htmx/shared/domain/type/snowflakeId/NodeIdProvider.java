@@ -6,38 +6,39 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.venuspj.htmx.common.util.provider.ipaddress.IpAddressProvider;
 import org.venuspj.htmx.shared.domain.type.application.ApplicationInfo;
 
-/**
- *
- */
+
 public class NodeIdProvider {
 
   private final static AtomicReference<NodeIdProvider> NODE_ID_PROVIDER =
       new AtomicReference<>(new NodeIdProvider());
 
-  private Long nodeId;
+  /**
+   *
+   */
+  private static Long NODE_ID;
 
   NodeIdProvider() {
-    nodeId = null;
+    NODE_ID = null;
     try {
       String hostName = IpAddressProvider.ipAddress();
       String applicationName = ApplicationInfo.name();
       Long serverPort = ApplicationInfo.port();
-      nodeId = Math.abs((long) Objects.hash(hostName, applicationName, serverPort));
+      NODE_ID = Math.abs((long) Objects.hash(hostName, applicationName, serverPort));
     } catch (UnknownHostException e) {
-      nodeId = (long) (Math.random() * (Math.pow(2, 10) - 1));
+      NODE_ID = (long) (Math.random() * (Math.pow(2, 10) - 1));
     }
-    nodeId = nodeId & 1023;
+    NODE_ID = NODE_ID & 1023;
 
   }
 
 
   protected Long nodeId() {
-    return nodeId;
+    return NODE_ID;
   }
 
   public static Long getNodeId() {
-    return NodeIdProvider.NODE_ID_PROVIDER.get().nodeId();
-    
+    return NODE_ID_PROVIDER.get().nodeId();
+
   }
 
 
