@@ -37,6 +37,7 @@ public class NodeIdProvider {
 
   public static Long getNodeId() {
     return NodeIdProvider.NODE_ID_PROVIDER.get().nodeId();
+    
   }
 
 
