@@ -21,7 +21,7 @@ public final class FixedSnowflakeIdProvider extends SnowflakeIdProvider {
    * @param snowflakeId FixedSnowflakeIdProviderが使用する固定Snowflake ID（null不可）
    */
   public static void initialize(@NonNull Long snowflakeId) {
-    SnowflakeIdProvider.setSnowflakeIdProvider(new FixedSnowflakeIdProvider(snowflakeId));
+    new SnowflakeIdProvider(new FixedSnowflakeIdProvider(snowflakeId));
 
   }
 

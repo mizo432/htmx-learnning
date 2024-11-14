@@ -8,27 +8,28 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Spy;
 
 @DisplayName("StaticNodeIdProviderクラス")
-class StaticNodeIdProviderTest {
+class FixedNodeIdProviderTest {
 
   @Spy
-  private StaticNodeIdProvider staticNodeIdProvider;
+  private FixecNodeIdProvider staticNodeIdProvider;
 
   @Nested
   @DisplayName("initializeメソッド")
-  class Initialize {
+  class InitializeTest {
 
     @Test
     @DisplayName("nodeIdが正しく設定されている場合")
     void shouldSetCorrectNodeId() {
       long nodeId = 5L;
 
-      StaticNodeIdProvider.initialize(nodeId);
+      FixecNodeIdProvider.initialize(nodeId);
 
       long actualNodeId = NodeIdProvider.getNodeId();
 
       assertThat(actualNodeId).as("設定されたnodeIdが正しいこと").isEqualTo(nodeId);
-      StaticNodeIdProvider.clear();
-      
+
+      FixecNodeIdProvider.clear();
+
 
     }
 

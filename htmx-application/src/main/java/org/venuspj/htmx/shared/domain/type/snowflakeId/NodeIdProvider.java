@@ -6,9 +6,12 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.venuspj.htmx.common.util.provider.ipaddress.IpAddressProvider;
 import org.venuspj.htmx.shared.domain.type.application.ApplicationInfo;
 
+/**
+ *
+ */
 public class NodeIdProvider {
 
-  private final static AtomicReference<NodeIdProvider> nodeIdProvider =
+  private final static AtomicReference<NodeIdProvider> NODE_ID_PROVIDER =
       new AtomicReference<>(new NodeIdProvider());
 
   private Long nodeId;
@@ -33,18 +36,13 @@ public class NodeIdProvider {
   }
 
   public static Long getNodeId() {
-    return NodeIdProvider.nodeIdProvider.get().nodeId();
+    return NodeIdProvider.NODE_ID_PROVIDER.get().nodeId();
   }
 
 
-  NodeIdProvider(NodeIdProvider nodeIdProvider) {
-    NodeIdProvider.setNodeIdProvider(nodeIdProvider);
+  protected NodeIdProvider(NodeIdProvider nodeIdProvider) {
+    NODE_ID_PROVIDER.set(nodeIdProvider);
   }
-
-  public static void setNodeIdProvider(NodeIdProvider nodeIdProvider) {
-    NodeIdProvider.nodeIdProvider.set(nodeIdProvider);
-  }
-
 
   /**
    * DateProviderを初期化する
@@ -52,7 +50,7 @@ public class NodeIdProvider {
   public static void clear() {
     IpAddressProvider.clear();
     ApplicationInfo.clear();
-    NodeIdProvider.nodeIdProvider.set(new NodeIdProvider());
+    NODE_ID_PROVIDER.set(new NodeIdProvider());
 
   }
 

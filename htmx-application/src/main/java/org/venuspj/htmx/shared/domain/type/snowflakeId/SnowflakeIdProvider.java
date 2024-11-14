@@ -9,7 +9,7 @@ import org.venuspj.htmx.common.util.provider.datetime.DateProvider;
  */
 public class SnowflakeIdProvider {
 
-  private final static AtomicReference<SnowflakeIdProvider> snowflakeIdProvider =
+  private final static AtomicReference<SnowflakeIdProvider> SNOWFLAKE_ID_PROVIDER =
       new AtomicReference<>(new SnowflakeIdProvider());
 
   /**
@@ -57,13 +57,12 @@ public class SnowflakeIdProvider {
 
   public SnowflakeIdProvider(SnowflakeIdProvider snowflakeIdProvider) {
     workerId = NodeIdProvider.getNodeId();
-
-    SnowflakeIdProvider.snowflakeIdProvider.set(snowflakeIdProvider);
+    SNOWFLAKE_ID_PROVIDER.set(snowflakeIdProvider);
 
   }
 
   protected static void setSnowflakeIdProvider(SnowflakeIdProvider snowflakeIdProvider) {
-    SnowflakeIdProvider.snowflakeIdProvider.set(snowflakeIdProvider);
+    SnowflakeIdProvider.SNOWFLAKE_ID_PROVIDER.set(snowflakeIdProvider);
 
   }
 
@@ -101,7 +100,7 @@ public class SnowflakeIdProvider {
    * @throws RuntimeException 時計が後ろ向きに動く場合。
    */
   public static long generateId() {
-    return SnowflakeIdProvider.snowflakeIdProvider.get().snowflakeId();
+    return SnowflakeIdProvider.SNOWFLAKE_ID_PROVIDER.get().snowflakeId();
 
   }
 
@@ -126,7 +125,7 @@ public class SnowflakeIdProvider {
     lastTimestamp = -62167252739000L;
     DateProvider.clear();
     NodeIdProvider.clear();
-    snowflakeIdProvider.set(new SnowflakeIdProvider());
+    SNOWFLAKE_ID_PROVIDER.set(new SnowflakeIdProvider());
 
   }
 }

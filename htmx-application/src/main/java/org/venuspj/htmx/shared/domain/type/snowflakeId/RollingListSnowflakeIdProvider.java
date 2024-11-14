@@ -17,6 +17,7 @@ import lombok.NonNull;
  * ユニークなIDを生成するために、Snowflake IDのローリングリストを維持します。
  */
 public class RollingListSnowflakeIdProvider extends SnowflakeIdProvider {
+
   private static final String ILLEGAL_ARGUMENT_MESSAGE = "Snowflake IDs must not be empty";
   private final List<Long> idList = new ArrayList<>();
   private int currentIndex;
@@ -30,7 +31,7 @@ public class RollingListSnowflakeIdProvider extends SnowflakeIdProvider {
     if (snowflakeIds.length == 0) {
       throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
     }
-    SnowflakeIdProvider.setSnowflakeIdProvider(
+    new SnowflakeIdProvider(
         new RollingListSnowflakeIdProvider(Arrays.asList(snowflakeIds)));
   }
 
@@ -45,7 +46,7 @@ public class RollingListSnowflakeIdProvider extends SnowflakeIdProvider {
       snowflakeIds.add(snowflakeId);
     }
 
-    SnowflakeIdProvider.setSnowflakeIdProvider(
+    new SnowflakeIdProvider(
         new RollingListSnowflakeIdProvider(snowflakeIds));
   }
 
@@ -71,11 +72,14 @@ public class RollingListSnowflakeIdProvider extends SnowflakeIdProvider {
 }
 
 class InitialValueExtractor {
+
   static long extractLowerValue(Range<Long> range) {
-    return (range.lowerBoundType() == BoundType.CLOSED) ? range.lowerEndpoint() : range.lowerEndpoint() + 1;
+    return (range.lowerBoundType() == BoundType.CLOSED) ? range.lowerEndpoint()
+        : range.lowerEndpoint() + 1;
   }
 
   static long extractUpperValue(Range<Long> range) {
-    return (range.upperBoundType() == BoundType.CLOSED) ? range.upperEndpoint() : range.upperEndpoint() - 1;
+    return (range.upperBoundType() == BoundType.CLOSED) ? range.upperEndpoint()
+        : range.upperEndpoint() - 1;
   }
 }
