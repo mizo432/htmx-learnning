@@ -25,7 +25,7 @@ public class FixedIpAddressProvider extends IpAddressProvider {
 
   private static final AtomicReference<String> IP_ADDRESS = new AtomicReference<>();
 
-  FixedIpAddressProvider(@NonNull String ipAddress) {
+  private FixedIpAddressProvider(@NonNull String ipAddress) {
     IP_ADDRESS.set(ipAddress);
   }
 

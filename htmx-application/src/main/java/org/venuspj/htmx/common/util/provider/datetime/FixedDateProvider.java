@@ -40,7 +40,7 @@ public final class FixedDateProvider extends DateProvider {
 
   private FixedDateProvider(LocalDate fixedDate) {
     super();
-    FixedDateProvider.FIXED_DATE.set(fixedDate);
+    FIXED_DATE.set(fixedDate);
   }
 
   /**
@@ -57,7 +57,7 @@ public final class FixedDateProvider extends DateProvider {
 
   @Override
   protected LocalDateTime now() {
-    return LocalDateTime.of(FixedDateProvider.FIXED_DATE.get(), LocalTime.now());
+    return LocalDateTime.of(FIXED_DATE.get(), LocalTime.now());
 
   }
 
