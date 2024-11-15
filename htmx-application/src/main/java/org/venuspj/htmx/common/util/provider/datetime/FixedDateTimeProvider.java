@@ -11,8 +11,19 @@ import lombok.NonNull;
  */
 public class FixedDateTimeProvider extends DateProvider {
 
+  /**
+   * {@link LocalDateTime} をアトミックに変更できる静的な最終参照です。
+   * <p>
+   * この変数は {@link FixedDateTimeProvider} クラスの一部であり、固定された日時の値を保持するために使用されます。
+   * これは、特定の日時の値が必要なテストシナリオで特に役立ちます。
+   */
   private static final AtomicReference<LocalDateTime> FIXED_DATE_TIME = new AtomicReference<>();
 
+  /**
+   * 指定された固定日時でFixedDateTimeProviderを構築します。
+   *
+   * @param fixedDateTime 使用する固定日時を表すLocalDateTime。
+   */
   private FixedDateTimeProvider(@NonNull LocalDateTime fixedDateTime) {
     FIXED_DATE_TIME.set(fixedDateTime);
 
@@ -30,6 +41,11 @@ public class FixedDateTimeProvider extends DateProvider {
 
   }
 
+  /**
+   * このプロバイダで指定された固定された日時を返します。
+   *
+   * @return このプロバイダで使用される固定された {@link LocalDateTime}
+   */
   @Override
   protected LocalDateTime now() {
     return FIXED_DATE_TIME.get();
