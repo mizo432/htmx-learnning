@@ -18,13 +18,13 @@ class FixedNodeIdProviderTest {
     void shouldSetCorrectNodeId() {
       long nodeId = 5L;
 
-      FixecNodeIdProvider.initialize(nodeId);
+      FixedNodeIdProvider.initialize(nodeId);
 
       long actualNodeId = NodeIdProvider.getNodeId();
 
       assertThat(actualNodeId).as("設定されたnodeIdが正しいこと").isEqualTo(nodeId);
 
-      FixecNodeIdProvider.clear();
+      FixedNodeIdProvider.clear();
 
 
     }

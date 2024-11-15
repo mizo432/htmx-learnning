@@ -1,15 +1,15 @@
 package org.venuspj.htmx.shared.domain.type.snowflakeId;
 
-public class FixecNodeIdProvider extends NodeIdProvider {
+public class FixedNodeIdProvider extends NodeIdProvider {
 
   private static long NODE_ID;
 
-  FixecNodeIdProvider(long nodeId) {
+  private FixedNodeIdProvider(long nodeId) {
     NODE_ID = nodeId;
   }
 
   public static void initialize(long nodeId) {
-    new NodeIdProvider(new FixecNodeIdProvider(nodeId));
+    new NodeIdProvider(new FixedNodeIdProvider(nodeId));
 
   }
 
