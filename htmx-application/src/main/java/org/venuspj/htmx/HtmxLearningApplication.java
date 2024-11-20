@@ -2,6 +2,7 @@ package org.venuspj.htmx;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * The HtmxLearningApplication is the entry point to the Spring Boot application.
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @Configuration, @EnableAutoConfiguration, and @ComponentScan annotations.
  */
+@EnableAsync
 @SpringBootApplication
 public class HtmxLearningApplication {
 
