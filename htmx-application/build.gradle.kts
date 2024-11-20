@@ -1,9 +1,11 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.4.0-M3"
+    id("org.springframework.boot") version "3.3.5"
     id("io.spring.dependency-management") version "1.1.6"
 }
-
+repositories {
+    mavenCentral()
+}
 group = "org.venuspj"
 version = "0.0.1-SNAPSHOT"
 
@@ -20,11 +22,6 @@ extra["htmxOrgVersion"] = "2.0.2"
 extra["assertjVersion"] = "3.26.3"
 extra["guavaVersion"] = "33.3.1-jre"
 // 他のバージョンもここに追加
-
-repositories {
-    mavenCentral()
-    maven { url = uri("https://repo.spring.io/milestone") }
-}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
