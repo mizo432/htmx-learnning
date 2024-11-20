@@ -1,16 +1,19 @@
 package org.venuspj.htmx.admin.domain.model.person;
 
-import com.google.common.base.Objects;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import java.util.Objects;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.proxy.HibernateProxy;
 
 @Entity
 @Table(name = "people")
-@Data
+@Getter
+@Setter
 @ToString(exclude = "password")
 public class Person {
 
@@ -71,26 +74,6 @@ public class Person {
 
   }
 
-  @Override
-  public boolean equals(Object other) {
-    if (this == other) {
-      return true;
-    }
-    if (other == null || getClass() != other.getClass()) {
-      return false;
-    }
-    Person that = (Person) other;
-    return Objects.equal(id, that.id) && Objects.equal(email, that.email) && Objects.equal(
-        phone, that.phone) && Objects.equal(initials, that.initials) && Objects.equal(userCode,
-        that.userCode) && Objects.equal(password, that.password) && Objects.equal(isHidden,
-        that.isHidden) && Objects.equal(name, that.name);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hashCode(id);
-  }
-
   public Person updateEntity(Long personId) {
     return new Person(personId, email, phone, initials, userCode, password, isHidden, name);
 
@@ -98,5 +81,32 @@ public class Person {
 
   public Person delete() {
     return new Person(id, email, phone, initials, userCode, password, true, name);
+  }
+
+  @Override
+  public final boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null) {
+      return false;
+    }
+    Class<?> oEffectiveClass = o instanceof HibernateProxy
+        ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass()
+        : o.getClass();
+    Class<?> thisEffectiveClass = this instanceof HibernateProxy
+        ? ((HibernateProxy) this).getHibernateLazyInitializer()
+        .getPersistentClass() : this.getClass();
+    if (thisEffectiveClass != oEffectiveClass) {
+      return false;
+    }
+    Person person = (Person) o;
+    return getId() != null && Objects.equals(getId(), person.getId());
+  }
+
+  @Override
+  public final int hashCode() {
+    return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer()
+        .getPersistentClass().hashCode() : getClass().hashCode();
   }
 }

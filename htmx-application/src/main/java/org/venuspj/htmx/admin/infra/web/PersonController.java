@@ -76,7 +76,7 @@ public class PersonController {
   public String delete(Long personId) {
     dropPerson.execute(personId);
     return "redirect:/admin/people";
-    
+
   }
 
 }
