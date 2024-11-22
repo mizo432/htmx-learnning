@@ -1,4 +1,4 @@
-package org.venuspj.htmx.admin.infra.query.person;
+package org.venuspj.htmx.admin.adapter.query.person;
 
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package org.venuspj.htmx.admin.infra.query.project;
+package org.venuspj.htmx.admin.adapter.query.project;
 
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class ProjectQueryImpl implements ProjectQuery {
   @Override
   public Optional<Project> findById(Long id) {
     return projectRepository.findById(id);
-    
+
   }
 
 }

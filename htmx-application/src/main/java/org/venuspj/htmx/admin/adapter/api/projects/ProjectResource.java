@@ -1,4 +1,4 @@
-package org.venuspj.htmx.admin.infra.api.projects;
+package org.venuspj.htmx.admin.adapter.api.projects;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -40,6 +40,9 @@ public class ProjectResource {
 
   }
 
+  /**
+   * 1
+   */
   @PostMapping
   public Project createProject(@RequestBody Project project) {
     return createProjectCommand.execute(Project.newInstance(project));

@@ -1,4 +1,4 @@
-package org.venuspj.htmx.admin.infra.web;
+package org.venuspj.htmx.admin.adapter.web;
 
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
